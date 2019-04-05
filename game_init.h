@@ -15,13 +15,15 @@
 #define NUM_ROWS 6
 //number of columns of the board
 #define NUM_COLUMNS 9
+//max number of players in the game
+#define NUM_PLAYERS 6
 
 
 //types of squares
 enum stype{
     NORMAL, OBSTACLE };
 
-//colors of tokens
+//colours of tokens
 enum color {
     RED, BLU, GREEN, YELLOW, PINK, ORANGE
 };
@@ -48,9 +50,10 @@ typedef struct square{
  * with the information about the player
  * such as a name and a color.
  */
-typedef struct player{
-    
-    
+typedef struct player
+{
+    char name[50];
+    char color[50];
 }player; 
 
 
@@ -69,7 +72,7 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]);
  * Output: The number of players of the game
  *
  */
-int initialize_players(player players[]);
+int initialize_players(player players[NUM_PLAYERS]);
 
 
 
