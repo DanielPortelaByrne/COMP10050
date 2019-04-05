@@ -6,7 +6,7 @@
 
 /* 
  * File:   main.c
- * Author: lpasqua
+ * Author: Daniel Portela Byrne
  *
  * Created on 06 March 2019, 12:11
  */
