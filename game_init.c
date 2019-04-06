@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+//game_init.c contains the implementation of the function needed to initialize the board
 
 #include "game_init.h"
 #include <stdio.h>
@@ -45,19 +40,22 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]){
  */
 int initialize_players(player players[6])
 {
-    player players[6];
-    int num;
+    int num, j;
     char name;
     //char color;
-    printf("How many players do you want to input? ");
+    printf("How many players do you want to input? (2-6)");
     scanf("%d", &num);
+    if(num<2 || num>6){
+        printf("Error. Enter a number between 2 and 6 inclusive.\n");
+        return 0;
+    }
 
     for(int i=0; i<num; i++)
     {
-      printf("Enter a players name ");
+      printf("Enter a players name:");
       scanf("%s", &players[i].name);
-      /*printf("Choose a player colour: red, blue, green, yellow, pink, orange");
-      scanf("%s", &players[i][j].color)*/
+      printf("Choose a player colour: red, blue, green, yellow, pink, orange");
+      scanf("%s", &players[i]g.color);
     }
         return num;
     }

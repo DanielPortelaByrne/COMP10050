@@ -53,7 +53,8 @@ typedef struct square{
 typedef struct player
 {
     char name[50];
-    char color[50];
+    char color[6];
+
 }player; 
 
 
