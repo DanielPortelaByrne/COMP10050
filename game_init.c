@@ -38,12 +38,12 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]){
  * Input: the array of players to be initialized
  * Output: The number of players of the game
  */
-int initialize_players(player players[6])
+int initialize_players(player players[NUM_PLAYERS])
 {
     int num, j;
     char name;
     //char color;
-    printf("How many players do you want to input? (2-6)");
+    printf("How many players do you want to input? (2-6): ");
     scanf("%d", &num);
     if(num<2 || num>6){
         printf("Error. Enter a number between 2 and 6 inclusive.\n");
@@ -52,10 +52,38 @@ int initialize_players(player players[6])
 
     for(int i=0; i<num; i++)
     {
-      printf("Enter a players name:");
+      printf("Enter a players name: ");
       scanf("%s", &players[i].name);
-      printf("Choose a player colour: red, blue, green, yellow, pink, orange");
-      scanf("%s", &players[i]g.color);
     }
-        return num;
-    }
+    return num;
+}
+
+/*
+* This function is for player colour
+*
+* Input: The array of players
+* Output: The colours relative to each player of the game
+*/
+int initialize_colors(enum color)
+{
+    int choice = 0;
+    printf("Choose a player colour from the list:\n(0) red\n(1) blue\n(2) green\n(3) yellow\n(4) pink\n(5) orange\n");
+      scanf("%d", choice);
+      
+      switch(today)
+      {
+          case(RED):scanf("%");
+          break;
+          case(BLUE):printf("Day (string format): %s\n", "Tuesday");
+          break;
+          case(GREEN):printf("Day (string format): %s\n", "Wednesday");
+          break;
+          case(YELLOW):printf("Day (string format): %s\n", "Thursday");
+          break;
+          case(PINK):printf("Day (string format): %s\n", "Friday");
+          break;
+          case(ORANGE):printf("Day (string format): %s\n", "Friday");
+          break;
+          default:break;
+        }
+}

@@ -25,7 +25,7 @@ enum stype{
 
 //colours of tokens
 enum color {
-    RED, BLU, GREEN, YELLOW, PINK, ORANGE
+    RED, BLUE, GREEN, YELLOW, PINK, ORANGE
 };
 
 //defines a token. 
@@ -53,8 +53,7 @@ typedef struct square{
 typedef struct player
 {
     char name[50];
-    char color[6];
-
+    char color[NUM_PLAYERS];
 }player; 
 
 
@@ -74,6 +73,14 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]);
  *
  */
 int initialize_players(player players[NUM_PLAYERS]);
+
+/*
+* This function is for player colour
+*
+* Input: The array of players
+* Output: The colours relative to each player of the game
+*/
+int initialize_colors(enum color);
 
 
 
