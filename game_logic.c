@@ -75,8 +75,18 @@ void printLine(){
  *        numPlayers - the number of players  
  */
 void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
-    // TO BE IMPLEMENTED
+    
+    //keeps track of the min no. of tokens placed on a square in the first column
+    int minNumOfTokens= 0;
 
+    /*  INSTRUCTIONS: (hi dan <3) 
+                Allow players to only put their token on the first column
+                Ensure players do not put their token on top of a token of same colour
+                Ensure playesr put their token in a square that has the minimum no. of tokens in it
+                (Hint: Each square must keep track of how many tokens are in it, may require modification to struct square in game_init.h)
+                
+                minNumOfTokens should be incremented by ONE every time 6 (6=NUM_ROWS) or a mult of 6 tokens are placed in the squares of the first column.
+    */
 }
 
 

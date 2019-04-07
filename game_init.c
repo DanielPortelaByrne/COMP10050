@@ -43,7 +43,7 @@ int initialize_players(player players[6])
     int num, j;
     char name;
     //char color;
-    printf("How many players do you want to input? (2-6)");
+    printf("How many players do you want to input? (2-6)\n");
     scanf("%d", &num);
     if(num<2 || num>6){
         printf("Error. Enter a number between 2 and 6 inclusive.\n");
@@ -52,10 +52,10 @@ int initialize_players(player players[6])
 
     for(int i=0; i<num; i++)
     {
-      printf("Enter a players name:");
+      printf("Enter a players name: ");
       scanf("%s", &players[i].name);
-      printf("Choose a player colour: red, blue, green, yellow, pink, orange");
-      scanf("%s", &players[i]g.color);
+      printf("Choose a player colour: red, blue, green, yellow, pink, orange\n");
+      scanf("%s", &players[i].color);
     }
         return num;
     }
