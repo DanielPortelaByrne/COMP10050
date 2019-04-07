@@ -40,9 +40,7 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]){
  */
 int initialize_players(player players[NUM_PLAYERS])
 {
-    int num, j;
-    char name;
-    //char color;
+    int num;
     printf("How many players do you want to input? (2-6): ");
     scanf("%d", &num);
     if(num<2 || num>6){
@@ -70,20 +68,39 @@ int initialize_colors(enum color)
     printf("Choose a player colour from the list:\n(0) red\n(1) blue\n(2) green\n(3) yellow\n(4) pink\n(5) orange\n");
       scanf("%d", choice);
       
-      switch(today)
+      switch(type)
       {
-          case(RED):scanf("%");
+          case(RED):printf("Colour chosen: %s\n", "red");
           break;
-          case(BLUE):printf("Day (string format): %s\n", "Tuesday");
+          case(BLUE):printf("Colour chosen: %s\n", "blue");
           break;
-          case(GREEN):printf("Day (string format): %s\n", "Wednesday");
+          case(GREEN):printf("Colour chosen: %s\n", "green");
           break;
-          case(YELLOW):printf("Day (string format): %s\n", "Thursday");
+          case(YELLOW):printf("Colour chosen: %s\n", "yellow");
           break;
-          case(PINK):printf("Day (string format): %s\n", "Friday");
+          case(PINK):printf("Colour chosen: %s\n", "pink");
           break;
-          case(ORANGE):printf("Day (string format): %s\n", "Friday");
+          case(ORANGE):printf("Colour chosen: %s\n", "orange");
           break;
           default:break;
         }
+}
+void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPLayers){
+    int minNumOfTokens = 0;
+    int selectedSquare = 0;
+
+    for(int i=0; i<4; i++){
+        for(int j=0; j<numPLayers; j++){
+
+            printf("Player %d please select a square\n", j);
+            scanf("%d", &selectedSquare);
+
+            board[selectedSquare][0].stack = (token *) malloc(sizeof(token));
+            board[selectedSquare][0].stack->col = players[j].col;
+            board[selectedSquare][0].numTokens++;
+
+            if((numPLayers * i) + j +1)%NUM_ROWS == 0)
+            minNumOfTokens++;
+        }
+    }
 }
