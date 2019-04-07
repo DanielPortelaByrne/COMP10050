@@ -38,10 +38,12 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]){
  * Input: the array of players to be initialized
  * Output: The number of players of the game
  */
-int initialize_players(player players[NUM_PLAYERS])
+int initialize_players(player players[6])
 {
-    int num;
-    printf("How many players do you want to input? (2-6):\n");
+    int num, j;
+    char name;
+    //char color;
+    printf("How many players do you want to input? (2-6)\n");
     scanf("%d", &num);
     if(num<2 || num>6){
         printf("Error. Enter a number between 2 and 6 inclusive.\n");
@@ -52,58 +54,8 @@ int initialize_players(player players[NUM_PLAYERS])
     {
       printf("Enter a players name: ");
       scanf("%s", &players[i].name);
-      /*
       printf("Choose a player colour: red, blue, green, yellow, pink, orange\n");
-      scanf("%s", &players[i].color); */
+      scanf("%s", &players[i].color);
     }
-    return num;
-}
-
-/*
-* This function is for player colour
-*
-* Input: The array of players
-* Output: The colours relative to each player of the game
-*/
-int initialize_colors(enum color)
-{
-    int choice = 0;
-    printf("Choose a player colour from the list:\n(0) red\n(1) blue\n(2) green\n(3) yellow\n(4) pink\n(5) orange\n");
-      scanf("%d", choice);
-      
-      switch(type)
-      {
-          case(RED):printf("Colour chosen: %s\n", "red");
-          break;
-          case(BLUE):printf("Colour chosen: %s\n", "blue");
-          break;
-          case(GREEN):printf("Colour chosen: %s\n", "green");
-          break;
-          case(YELLOW):printf("Colour chosen: %s\n", "yellow");
-          break;
-          case(PINK):printf("Colour chosen: %s\n", "pink");
-          break;
-          case(ORANGE):printf("Colour chosen: %s\n", "orange");
-          break;
-          default:break;
-        }
-}
-void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPLayers){
-    int minNumOfTokens = 0;
-    int selectedSquare = 0;
-
-    for(int i=0; i<4; i++){
-        for(int j=0; j<numPLayers; j++){
-
-            printf("Player %d please select a square\n", j);
-            scanf("%d", &selectedSquare);
-
-            board[selectedSquare][0].stack = (token *) malloc(sizeof(token));
-            board[selectedSquare][0].stack->col = players[j].col;
-            board[selectedSquare][0].numTokens++;
-
-            if((numPLayers * i) + j +1)%NUM_ROWS == 0)
-            minNumOfTokens++;
-        }
+        return num;
     }
-}

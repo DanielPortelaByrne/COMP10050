@@ -35,7 +35,7 @@ void print_board(square board[NUM_ROWS][NUM_COLUMNS]){
     printf("                THE BOARD\n");
     for(int i =0; i < NUM_ROWS; i++){
        
-        //prints a horizontal line
+        //prints an horizontal line
         printLine();
         //prints the row number
         printf(" %d ", i);
