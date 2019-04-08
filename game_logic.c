@@ -134,16 +134,18 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
     int dice=0;
     char option;
+
     srand(time(NULL));
 
     for(int i=0; i<numPlayers; i++)
     {
     //dice roll
+    
     dice = rand() % 6;
     dice++; //eliminates possibility of dice rolling a zero
 
-    printf("\n%s has rolled the dice and got %d", players[i].name, dice);
-    printf("\n%s, would you like to move one of your tokens up or down? (optional)(enter y for yes, n for no)", players[i].name);
+    printf("%s has rolled the dice and got %d\n", players[i], dice);
+    printf("%s, would you like to move one of your tokens up or down? (optional)(enter y for yes, n for no)\n", players[i]);
     scanf(" %c", &option);
     }
 }
