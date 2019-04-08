@@ -55,7 +55,7 @@ int initialize_players(player players[6])
       printf("Enter a players name: ");
       scanf("%s", &players[i].name);
       printf("Choose a player colour: red, blue, green, yellow, pink, orange\n");
-      scanf("%s", &players[i].color);
+      scanf("%s", &players[i].col);
     }
         return num;
     }

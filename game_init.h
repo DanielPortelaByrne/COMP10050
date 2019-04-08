@@ -20,7 +20,7 @@ enum color {
 //defines a token. 
 //Note each token can be associated with a color
 typedef struct token{
-   enum color col; 
+   enum color col;
     
 }token;
 
@@ -45,8 +45,8 @@ typedef struct player{
 
     //a player is characterized by a name, color AND-> the no. of their token in the last colum!!
     char name[50];
-    enum color color;
-    int numTokensLastColor;
+    enum color col;
+    int numTokensLastCol;
 
 }player; 
 

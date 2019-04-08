@@ -7,6 +7,8 @@
 
 #include "game_init.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void printLine();
 
@@ -76,10 +78,7 @@ void printLine(){
  */
 void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
     
-    //keeps track of the min no. of tokens placed on a square in the first column
-    int minNumOfTokens= 0;
-
-    /*  INSTRUCTIONS: (hi dan <3) 
+        /*  INSTRUCTIONS: (hi dan <3) 
                 Allow players to only put their token on the first column
                 Ensure players do not put their token on top of a token of same colour
                 Ensure playesr put their token in a square that has the minimum no. of tokens in it
@@ -87,6 +86,30 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                 
                 minNumOfTokens should be incremented by ONE every time 6 (6=NUM_ROWS) or a mult of 6 tokens are placed in the squares of the first column.
     */
+
+    //keeps track of the min no. of tokens placed on a square in the first column
+    int minNumOfTokens= 0;
+    int selectedSquare= 0;
+
+    for(int i=0; i<4; i++){ //these for loops ensure each player places their tokens on the first column
+        for(int j=1; j<numPlayers+1; j++){
+
+            printf("Player %d please select a square\n", j);
+            scanf("%d", &selectedSquare);
+
+            /*TO BE IMPLEMENTED: if square contains min no. of tokens and does not have a token of the same color of the player.
+              VERIFY whether the square selected has the min. no. and whether it does not contain a token of the same color selected by the player. */
+
+            board[selectedSquare][0].stack = (token*) malloc(sizeof(token));
+            board[selectedSquare][0].stack->col = players[j].col;
+            board[selectedSquare][0].numTokens++; //example instructions to add token to square. Overwrites an already placed token (should not ultimately do this I think, simply an assumption)
+
+            //updates the minimum number of tokens
+            if(((numPlayers*i) +j +1)% NUM_ROWS==0)
+                minNumOfTokens++;
+        }
+    }
+
 }
 
 
@@ -99,7 +122,30 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
  */
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
-    //TO BE IMPLEMENTED
+    //function should manage the turns of the game
+
+    /* For each player this func should:
+     * 1. Roll the dice
+     * 2. Optionally ask player to move one of their tokens up or down
+     * 3. Move right any token placed in a row number equal to the no. rolled with the dice
+          If a player moves their own token to the last column, the numTokensLastCol of the...
+          player should be incremented. If that is equal to 3 the game ends of the func...
+          should return the no. of the winning player. */
+
+    int dice=0;
+    char option;
+
+    for(int i=1; i<numPlayers+1; i++)
+    {
+    //dice roll
+    srand(time(NULL));
+    dice = rand() % 6;
+    dice++; //eliminates possibility of dice rolling a zero
+
+    printf("Player %d has rolled the dice and got %d\n", i, dice);
+    printf("Player %d, would you like to move one of your tokens up or down? (optional)(enter y for yes, n for no)\n");
+    scanf("%c", &option);
+    }
 }
 
 
