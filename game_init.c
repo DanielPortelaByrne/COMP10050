@@ -10,7 +10,8 @@
  * Input: board - a 6x9 array of squares
  *
  */
-void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]){
+void initialize_board(square board[NUM_ROWS][NUM_COLUMNS])
+{
 
     for (int i =0; i< NUM_ROWS; i++)
     {
@@ -58,4 +59,4 @@ int initialize_players(player players[6])
       scanf("%s", &players[i].col);
     }
         return num;
-    }
+}
