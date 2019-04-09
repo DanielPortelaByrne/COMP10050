@@ -33,7 +33,8 @@ char print_token(token *t){
  * 
  * Input: the board to be printed. 
  */
-void print_board(square board[NUM_ROWS][NUM_COLUMNS]){
+void print_board(square board[NUM_ROWS][NUM_COLUMNS])
+{
     printf("                THE BOARD\n");
     for(int i =0; i < NUM_ROWS; i++){
        
@@ -44,8 +45,10 @@ void print_board(square board[NUM_ROWS][NUM_COLUMNS]){
         char c = '\0' ;
         //if the square (i,j) is occupied,
         //c is assigned the initial of the color of the token that occupies the square
-        for (int j = 0; j < NUM_COLUMNS; j++){
-            if(board[i][j].stack != NULL){
+        for (int j = 0; j < NUM_COLUMNS; j++)
+        {
+            if(board[i][j].stack != NULL)
+            {
                 c = print_token(board[i][j].stack);
             }
             //if the square (i,j) is empty
@@ -76,7 +79,8 @@ void printLine(){
  *        players - the array of the players
  *        numPlayers - the number of players  
  */
-void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
+void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
+{
     
         /*  INSTRUCTIONS: (hi dan <3) 
                 Allow players to only put their token on the first column
@@ -92,7 +96,8 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     int selectedSquare= 0;
 
     for(int i=0; i<4; i++){ //these for loops ensure each player places their tokens on the first column
-        for(int j=1; j<numPlayers+1; j++){
+        for(int j=1; j<numPlayers+1; j++)
+        {
 
             printf("Player %d please select a square\n", j);
             scanf("%d", &selectedSquare);
@@ -121,7 +126,8 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
  *        numPlayers - the number of players  
  */
 
-void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
+void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
+{
     //function should manage the turns of the game
 
     /* For each player this func should:
