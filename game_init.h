@@ -9,31 +9,35 @@
 
 
 //types of squares
-enum stype{
-    NORMAL, OBSTACLE };
+enum stype
+{
+    NORMAL, OBSTACLE 
+};
 
 //colours of tokens
-enum color {
+enum color
+{
     RED, BLU, GREEN, YELLOW, PINK, ORANGE
 };
 
 //defines a token. 
 //Note each token can be associated with a color
-typedef struct token{
+typedef struct token
+{
    enum color col;
-    
+
 }token;
 
 //Defines a square of the board.
-typedef struct square{
+typedef struct square
+{
     //A square can be a NORMAL or an OBSTACLE square
      enum stype type;
      //the stack of tokens that can be placed on the board square
-     token * stack;  
+     token * stack;
      //***the number of tokens in a square --ADDED by Sean from lab2
-     int numTokens;    
+     int numTokens;
 }square;
-
 
 
 /*
@@ -41,7 +45,8 @@ typedef struct square{
  * with the information about the player
  * such as a name and a color.
  */
-typedef struct player{
+typedef struct player
+{
 
     //a player is characterized by a name, color AND-> the no. of their token in the last colum!!
     char name[50];
@@ -67,6 +72,3 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]);
  *
  */
 int initialize_players(player players[NUM_PLAYERS]);
-
-
-
