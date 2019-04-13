@@ -132,7 +132,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 {
     //function should manage the turns of the game
 
-    /* For each player this func should:
+    /* For each player this function should:
      * 1. Roll the dice
      * 2. Optionally ask player to move one of their tokens up or down
      * 3. Move right any token placed in a row number equal to the no. rolled with the dice
