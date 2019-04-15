@@ -22,7 +22,7 @@ char print_token(token *t)
 {
     if((*t).col== PINK) return 'P';
     if((*t).col== RED) return 'R';
-    if((*t).col== BLU) return 'B';
+    if((*t).col== BLUE) return 'B';
     if((*t).col== GREEN) return 'G';
     if((*t).col== ORANGE) return 'O';
     if((*t).col== YELLOW) return 'Y';
@@ -39,7 +39,7 @@ void print_board(square board[NUM_ROWS][NUM_COLUMNS])
     printf("                THE BOARD\n");
     for(int i =0; i < NUM_ROWS; i++){
        
-        //prints an horizontal line
+        //prints a horizontal line
         printLine();
         //prints the row number
         printf(" %d ", i);
@@ -108,7 +108,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             board[selectedSquare][0].stack->col = players[j].col;
             board[selectedSquare][0].numTokens++; //example instructions to add token to square. Overwrites an already placed token (should not ultimately do this I think, simply an assumption)
             
-            
+
             //updates the minimum number of tokens
             if(((numPlayers*i) +j +1)% NUM_ROWS==0)
                 minNumOfTokens++;
