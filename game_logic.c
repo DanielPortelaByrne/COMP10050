@@ -181,7 +181,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
         if(updown == 'u'){
             board[selectedSquare+1][0].stack = (token*) malloc(sizeof(token));
-            board[selectedSquare+1][0].stack->col = players[j].col;
+            board[selectedSquare+1][0].stack->col = players[i].col;
             board[selectedSquare][0].numTokens--;   //take the token from the last square's count
             board[selectedSquare-1][0].numTokens++; //add the token to the new square's count
         }
