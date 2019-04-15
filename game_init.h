@@ -1,4 +1,15 @@
-//init.h
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   newfile.h
+ * Author: lpasqua
+ *
+ * Created on 06 March 2019, 12:18
+ */
 
 //number of rows of the board
 #define NUM_ROWS 6
@@ -9,35 +20,30 @@
 
 
 //types of squares
-enum stype
-{
-    NORMAL, OBSTACLE 
-};
+enum stype{
+    NORMAL, OBSTACLE };
 
 //colours of tokens
-enum color
-{
-    RED, BLU, GREEN, YELLOW, PINK, ORANGE
+enum color {
+    RED, BLUE, GREEN, YELLOW, PINK, ORANGE
 };
 
 //defines a token. 
 //Note each token can be associated with a color
-typedef struct token
-{
-   enum color col;
-
+typedef struct token{
+   enum color col; 
+    
 }token;
 
 //Defines a square of the board.
-typedef struct square
-{
+typedef struct square{
     //A square can be a NORMAL or an OBSTACLE square
      enum stype type;
      //the stack of tokens that can be placed on the board square
-     token * stack;
-     //***the number of tokens in a square --ADDED by Sean from lab2
-     int numTokens;
+     token * stack; 
+     int numTokens;     
 }square;
+
 
 
 /*
@@ -47,11 +53,10 @@ typedef struct square
  */
 typedef struct player
 {
-
-    //a player is characterized by a name, color AND-> the no. of their token in the last colum!!
     char name[50];
     enum color col;
     int numTokensLastCol;
+    struct token token;
 
 }player; 
 
@@ -72,3 +77,16 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]);
  *
  */
 int initialize_players(player players[NUM_PLAYERS]);
+
+/*
+* This function is for player colour
+*
+* Input: The array of players
+* Output: The colours relative to each player of the game
+*/
+int initialize_colors(enum color);
+
+void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPLayers);
+
+
+

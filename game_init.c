@@ -43,6 +43,7 @@ int initialize_players(player players[6])
 {
     int num, j;
     char name;
+    char col[6][6] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange"};
     //enum col chosen;
     //char color;
     printf("How many players do you want to input? (2-6)\n");
@@ -56,31 +57,26 @@ int initialize_players(player players[6])
     {
       printf("Enter a players name: ");
       scanf("%s", &players[i].name);
-      printf("Choose a player colour: red, blue, green, yellow, pink, orange\n");
-      scanf("%s", &players[i].col);
-    }
-    /*switch (chosen)
+
+      switch(i)
     {
-        case (RED):
-            scanf(" ");
-            break;
-        case (BLU):
-            scanf(" ");
-            break;
-        case (GREEN):
-            scanf(" ");
-            break;
-        case (YELLOW):
-            scanf(" ");
-            break;
-        case (PINK):
-            scanf(" ");
-            break;
-        case (ORANGE):
-            scanf(" ");
-            break;
-        default:
-            break;
-    }*/
+        case(0):
+                players[i].token.col = RED;
+        case(1):
+                players[i].token.col = BLUE;
+        case(2):
+                players[i].token.col = GREEN;
+        case(3):
+                players[i].token.col = YELLOW;
+        case(4):
+                players[i].token.col = PINK;
+        case(5):
+                players[i].token.col = ORANGE;
+        default: break;
+    }
+
+      printf("Player %d has been assigned the colour %s.\n", i+1, col[i]);
+     // printf("Player %d has been assigned the colour %c.\n", i+1, players[i].token.col); attempt at printing to see if colour token is assigned propely
+    }
         return num;
 }
