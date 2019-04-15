@@ -36,7 +36,7 @@ typedef struct square
      //the stack of tokens that can be placed on the board square
      token * stack;
      //***the number of tokens in a square --ADDED by Sean from lab2
-     int numTokens=0;
+     int numTokens;
 }square;
 
 
