@@ -96,6 +96,9 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     //keeps track of the min no. of tokens placed on a square in the first column
     int minNumOfTokens= 0;
     int selectedSquare= 0;
+    for(int i=0; i<5; i++){ //initialises the numTokens on each square
+    board[i][0].numTokens = 0;
+    }
 
     for(int i=0; i<4; i++){ //these for loops ensure each player places their tokens on the first column
         for(int j=0; j<numPlayers; j++){
@@ -118,7 +121,8 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                 minNumOfTokens++;
             }
 
-            else{
+            else if(board[selectedSquare][0].numTokens != minNumOfTokens)
+            {
                 printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
                 j--;
             }
