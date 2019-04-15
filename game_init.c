@@ -59,18 +59,24 @@ int initialize_players(player players[6])
 
       switch(i)
     {
-        case(0):
+        case 0:
                 players[i].col = RED;
-        case(1):
+                break;
+        case 1:
                 players[i].col = BLUE;
-        case(2):
+                break;
+        case 2:
                 players[i].col = GREEN;
-        case(3):
+                break;
+        case 3:
                 players[i].col = YELLOW;
-        case(4):
+                break;
+        case 4:
                 players[i].col = PINK;
-        case(5):
+                break;
+        case 5:
                 players[i].col = ORANGE;
+                break;
         default: break;
     }
       printf("Player %d has been assigned the colour %s.\n", i+1, col[i]);

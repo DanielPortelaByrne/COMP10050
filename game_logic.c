@@ -173,10 +173,10 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
     if(option == 'y')
     {
-        printf("Which token would you like to move (enter square number).");
+        printf("Which token would you like to move (enter square number): ");
         scanf(" %d", selectedSquare);
 
-        printf("Would you like to move the token up (enter u) or down (enter d).");
+        printf("Would you like to move the token up (enter u) or down (enter d): ");
         scanf(" %c", updown);
 
         if(updown == 'u'){
