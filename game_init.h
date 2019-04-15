@@ -52,7 +52,7 @@ typedef struct players
     char name[50];
     enum color col;
     int numTokensLastCol;
-    token.col;
+    struct token token;
 
 }player; 
 
