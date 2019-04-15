@@ -41,11 +41,11 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS])
  */
 int initialize_players(player players[6])
 {
-    int num, j;
+    int num;
     char name;
     char col[7][7] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange", "\0"};
 
-    printf("How many players do you want to input? (2-6)\n");
+    printf("How many players do you want to input? (2-6): ");
     scanf("%d", &num);
     if(num<2 || num>6){
         printf("Error. Enter a number between 2 and 6 inclusive.\n");
