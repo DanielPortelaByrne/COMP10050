@@ -43,8 +43,7 @@ int initialize_players(player players[6])
 {
     int num, j;
     char name;
-    char col[6][6] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange"};
-    int *ptr;
+    char col[7][7] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange", "\0"};
 
     printf("How many players do you want to input? (2-6)\n");
     scanf("%d", &num);
@@ -61,22 +60,20 @@ int initialize_players(player players[6])
       switch(i)
     {
         case(0):
-                players[i].token.col = RED;
+                players[i].col = RED;
         case(1):
-                players[i].token.col = BLUE;
+                players[i].col = BLUE;
         case(2):
-                players[i].token.col = GREEN;
+                players[i].col = GREEN;
         case(3):
-                players[i].token.col = YELLOW;
+                players[i].col = YELLOW;
         case(4):
-                players[i].token.col = PINK;
+                players[i].col = PINK;
         case(5):
-                players[i].token.col = ORANGE;
+                players[i].col = ORANGE;
         default: break;
     }
-
       printf("Player %d has been assigned the colour %s.\n", i+1, col[i]);
-      //printf("Player %d has been assigned the colour %u.\n", i+1, players[i].token.col); //attempt at printing to see if colour token is assigned propely
     }
         return num;
 }
