@@ -43,6 +43,7 @@ int initialize_players(player players[6])
 {
     int num, j;
     char name;
+    //enum col chosen;
     //char color;
     printf("How many players do you want to input? (2-6)\n");
     scanf("%d", &num);
@@ -58,5 +59,28 @@ int initialize_players(player players[6])
       printf("Choose a player colour: red, blue, green, yellow, pink, orange\n");
       scanf("%s", &players[i].col);
     }
+    /*switch (chosen)
+    {
+        case (RED):
+            scanf(" ");
+            break;
+        case (BLU):
+            scanf(" ");
+            break;
+        case (GREEN):
+            scanf(" ");
+            break;
+        case (YELLOW):
+            scanf(" ");
+            break;
+        case (PINK):
+            scanf(" ");
+            break;
+        case (ORANGE):
+            scanf(" ");
+            break;
+        default:
+            break;
+    }*/
         return num;
 }

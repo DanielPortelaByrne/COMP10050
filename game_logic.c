@@ -46,8 +46,10 @@ void print_board(square board[NUM_ROWS][NUM_COLUMNS])
         char c = '\0' ;
         //if the square (i,j) is occupied,
         //c is assigned the initial of the color of the token that occupies the square
-        for (int j = 0; j < NUM_COLUMNS; j++){
-            if(board[i][j].stack != NULL){
+        for (int j = 0; j < NUM_COLUMNS; j++)
+        {
+            if(board[i][j].stack != NULL)
+            {
                 c = print_token(board[i][j].stack);
             }
             //if the square (i,j) is empty
@@ -130,7 +132,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 {
     //function should manage the turns of the game
 
-    /* For each player this func should:
+    /* For each player this function should:
      * 1. Roll the dice
      * 2. Optionally ask player to move one of their tokens up or down
      * 3. Move right any token placed in a row number equal to the no. rolled with the dice
@@ -155,7 +157,8 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     scanf(" %c", &option);
     printf("\n");
 
-    if(option == 'y'){
+    if(option == 'y')
+    {
 
     }
 
