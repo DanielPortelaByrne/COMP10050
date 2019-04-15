@@ -44,8 +44,8 @@ int initialize_players(player players[6])
     int num, j;
     char name;
     char col[6][6] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange"};
-    //enum col chosen;
-    //char color;
+    int *ptr;
+
     printf("How many players do you want to input? (2-6)\n");
     scanf("%d", &num);
     if(num<2 || num>6){
@@ -76,7 +76,7 @@ int initialize_players(player players[6])
     }
 
       printf("Player %d has been assigned the colour %s.\n", i+1, col[i]);
-     // printf("Player %d has been assigned the colour %c.\n", i+1, players[i].token.col); attempt at printing to see if colour token is assigned propely
+      //printf("Player %d has been assigned the colour %u.\n", i+1, players[i].token.col); //attempt at printing to see if colour token is assigned propely
     }
         return num;
 }
