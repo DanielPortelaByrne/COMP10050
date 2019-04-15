@@ -39,7 +39,7 @@ void print_board(square board[NUM_ROWS][NUM_COLUMNS])
     printf("                THE BOARD\n");
     for(int i =0; i < NUM_ROWS; i++){
        
-        //prints an horizontal line
+        //prints a horizontal line
         printLine();
         //prints the row number
         printf(" %d ", i);
@@ -105,15 +105,23 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 
             /*TO BE IMPLEMENTED: if square contains min no. of tokens and does not have a token of the same color of the player.
               VERIFY whether the square selected has the min. no. and whether it does not contain a token of the same color selected by the player. */
+            
+            if(board[selectedSquare][0].numTokens == minNumOfTokens){
 
             board[selectedSquare][0].stack = (token*) malloc(sizeof(token));
             board[selectedSquare][0].stack->col = players[j].col;
             board[selectedSquare][0].numTokens++; //example instructions to add token to square. Overwrites an already placed token (should not ultimately do this I think, simply an assumption)
             
-            
+
             //updates the minimum number of tokens
             if(((numPlayers*i) +j +1)% NUM_ROWS==0)
                 minNumOfTokens++;
+            }
+
+            else{
+                printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
+                j--;
+            }
         }
     }
 
