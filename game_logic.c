@@ -103,7 +103,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     for(int i=0; i<4; i++){ //these for loops ensure each player places their tokens on the first column
         for(int j=0; j<numPlayers; j++){
 
-            printf("%s, please select a square of the leftmost column\n", players[j].name);
+            printf("%s, please select a square of the leftmost column (squares numbered 0-5)\n", players[j].name);
             scanf("%d", &selectedSquare);
 
             /*TO BE IMPLEMENTED: if square contains min no. of tokens and does not have a token of the same color of the player.
@@ -154,6 +154,8 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
     int dice=0;
     char option;
+    int selectedSquare=0;
+    char updown;
 
     srand(time(NULL)); //seeds rand to current time
 
@@ -171,6 +173,21 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
     if(option == 'y')
     {
+        printf("Which token would you like to move (enter square number).");
+        scanf(" %d", selectedSquare);
+
+        printf("Would you like to move the token up (enter u) or down (enter d).");
+        scanf(" %c", updown);
+
+        if(updown == 'u'){
+            board[selectedSquare+1][0].stack = (token*) malloc(sizeof(token));
+            board[selectedSquare+1][0].stack->col = players[j].col;
+            board[selectedSquare][0].numTokens--;   //take the token from the last square's count
+            board[selectedSquare-1][0].numTokens++; //add the token to the new square's count
+        }
+        else if(updown == 'd'){
+
+        }
 
     }
 

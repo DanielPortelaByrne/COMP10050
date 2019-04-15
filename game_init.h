@@ -48,7 +48,7 @@ typedef struct square
 typedef struct players
 {
 
-    //a player is characterized by a name, color AND-> the no. of their token in the last column!!
+    //a player is characterized by a name, color AND-> the no. of their tokens in the last column!!
     char name[50];
     enum color col;
     int numTokensLastCol;
