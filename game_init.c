@@ -41,11 +41,11 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS])
  */
 int initialize_players(player players[6])
 {
-    int num, j;
+    int num;
     char name;
     char col[7][7] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange", "\0"};
 
-    printf("How many players do you want to input? (2-6)\n");
+    printf("How many players do you want to input? (2-6): ");
     scanf("%d", &num);
     if(num<2 || num>6){
         printf("Error. Enter a number between 2 and 6 inclusive.\n");
@@ -59,18 +59,24 @@ int initialize_players(player players[6])
 
       switch(i)
     {
-        case(0):
+        case 0:
                 players[i].col = RED;
-        case(1):
+                break;
+        case 1:
                 players[i].col = BLUE;
-        case(2):
+                break;
+        case 2:
                 players[i].col = GREEN;
-        case(3):
+                break;
+        case 3:
                 players[i].col = YELLOW;
-        case(4):
+                break;
+        case 4:
                 players[i].col = PINK;
-        case(5):
+                break;
+        case 5:
                 players[i].col = ORANGE;
+                break;
         default: break;
     }
       printf("Player %d has been assigned the colour %s.\n", i+1, col[i]);
