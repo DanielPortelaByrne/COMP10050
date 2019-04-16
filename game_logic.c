@@ -126,6 +126,9 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                 printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
                 j--;
             }
+
+            print_board(board);
+
         }
     }
 }
