@@ -25,6 +25,7 @@ enum color
 typedef struct token
 {
    enum color col;
+   //token * next;
 
 }token;
 
@@ -42,9 +43,9 @@ typedef struct square
 
 /* stack tings
 
-struct stack_elem{
-    int data;
-    struct stack_elem *next;
+struct stack{
+    int token;
+    struct stack *next;
 } stack;
 
 <<<<<<< HEAD
