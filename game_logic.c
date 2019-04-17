@@ -67,6 +67,26 @@ void printLine()
   printf("   -------------------------------------\n");  
 }
 
+
+
+struct stack * push(int value, struct stack *top){
+    struct stack *curr = top; //top is a pointer to the top of the stack
+    top = malloc(sizeof(stack));
+    top->token = value; //value is integer value of element to be pushed to stack!
+    top->next = curr; //current/original top goes to next value?
+    return top; //return top element of course
+}
+
+struct stack * pop(struct stack *top){
+    struct stack *curr = top;
+    if(curr!=NULL){
+        top = curr->next;
+        printf("Stack Data: %d\n", curr->token);
+        free(curr);
+    }
+    return top;
+}
+
 /*
  * Place tokens in the first column of the board
  * 
@@ -104,7 +124,8 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             board[selectedSquare][0].stack = (token*) malloc(sizeof(token));
             board[selectedSquare][0].stack->col = players[j].col;
             board[selectedSquare][0].numTokens++; //example instructions to add token to square. Overwrites an already placed token (should not ultimately do this I think, simply an assumption)
-            //stack *curr = next;
+            
+            push(value, stack);
 
             //updates the minimum number of tokens
             if(((numPlayers*i) +j +1)% NUM_ROWS==0)
@@ -121,25 +142,6 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 
         }
     }
-}
-
-
-struct stack * push(int value, struct stack *top){
-    struct stack *curr = top; //top is a pointer to the top of the stack
-    top = malloc(sizeof(stack));
-    top->token = value; //value is integer value of element to be pushed to stack!
-    top->next = curr; //current/original top goes to next value?
-    return top; //return top element of course
-}
-
-struct stack * pop(struct stack *top){
-    struct stack *curr = top;
-    if(curr!=NULL){
-        top = curr->next;
-        printf("Stack Data: %d\n", curr->token);
-        free(curr);
-    }
-    return top;
 }
 
 
