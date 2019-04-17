@@ -134,13 +134,24 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 }
 
 
-/*
- * Place tokens in the first column of the board
- * 
- * Input: board - a 6x9 array of squares that represents the board
- *        players - the array of the players
- *        numPlayers - the number of players
- */
+struct stack_elem * push(int value, struct stack_elem *top){
+    struct stack_elem *curr = top; //top is a pointer to the top of the stack
+    top = malloc(sizeof(stack));
+    top->data = value; //value is integer value of element to be pushed to stack!
+    top->next = curr; //current/original top goes to next value?
+    return top; //return top element of course
+}
+
+struct stack_elem * pop(struct stack_elem *top){
+    struct stack_elem *curr = top;
+    if(curr!=NULL){
+        top = curr->next;
+        printf("Stack Data: %d\n", curr->data);
+        free(curr);
+    }
+    return top;
+}
+
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
 {

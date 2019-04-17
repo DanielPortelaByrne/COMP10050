@@ -47,26 +47,6 @@ struct stack_elem{
     struct stack_elem *next;
 } stack;
 
-struct stack_elem * push(int value, struct stack_elem *top){
-    struct stack_elem *curr = top;
-    top = malloc(sizeof(stack));
-    top->data = value;
-    top->next = curr;
-    return top;
-}
-
-struct stack_elem * pop(struct stack_elem *top){
-    struct stack_elem *curr = top;
-    if(curr!=NULL){
-        top = curr->next;
-        printf("Stack Data: %d\n", curr->data);
-        free(curr);
-    }
-    return top;
-}
-
-
-
 
 
 /*
