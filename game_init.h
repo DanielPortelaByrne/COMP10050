@@ -40,7 +40,7 @@ typedef struct square
 }square;
 
 
-// stack tings
+/* stack tings
 
 struct stack_elem{
     int data;
@@ -63,7 +63,7 @@ struct stack_elem * pop(struct stack_elem *top){
         free(curr);
     }
     return top;
-}
+}*/
 
 
 
