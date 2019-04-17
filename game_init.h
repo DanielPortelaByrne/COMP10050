@@ -47,6 +47,7 @@ struct stack_elem{
     struct stack_elem *next;
 } stack;
 
+<<<<<<< HEAD
 struct stack_elem * push(int value, struct stack_elem *top){
     struct stack_elem *curr = top;
     top = malloc(sizeof(stack));
@@ -67,6 +68,8 @@ struct stack_elem * pop(struct stack_elem *top){
 
 
 
+=======
+>>>>>>> 88f2317618739d037f4e1aa487ec544f0aa664b9
 
 
 /*
