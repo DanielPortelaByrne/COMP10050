@@ -68,20 +68,21 @@ void printLine()
 }
 
 
-
-struct stack * push(int value, struct stack *top){
-    struct stack *curr = top; //top is a pointer to the top of the stack
-    top = malloc(sizeof(stack));
-    top->token = value; //value is integer value of element to be pushed to stack!
+struct token * push(int value, struct token *top)
+{
+    struct token *curr = top; //top is a pointer to the top of the stack
+    top = malloc(sizeof(token)); //creates a new node which top points to
+    top->col = value; //value is integer value of element to be pushed to stack!
     top->next = curr; //current/original top goes to next value?
-    return top; //return top element of course
+    return top; //return new top of stack
 }
 
-struct stack * pop(struct stack *top){
-    struct stack *curr = top;
+struct token * pop(struct token *top)
+{
+    struct token *curr = top;
     if(curr!=NULL){
         top = curr->next;
-        printf("Stack Data: %d\n", curr->token);
+        printf("Stack Data: %d\n", curr->col);
         free(curr);
     }
     return top;
@@ -110,8 +111,10 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     int minNumOfTokens= 0;
     int selectedSquare= 0;
 
-    for(int i=0; i<4; i++){ //these for loops ensure each player places their tokens on the first column
-        for(int j=0; j<numPlayers; j++){
+    for(int i=0; i<4; i++)
+    { //these for loops ensure each player places their tokens on the first column
+        for(int j=0; j<numPlayers; j++)
+        {
 
             printf("%s, please select a square of the leftmost column (squares numbered 0-5)\n", players[j].name);
             scanf("%d", &selectedSquare);
@@ -119,13 +122,14 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             /*TO BE IMPLEMENTED: if square contains min no. of tokens and does not have a token of the same color of the player.
               VERIFY whether the square selected has the min. no. and whether it does not contain a token of the same color selected by the player. */
             
-            if(board[selectedSquare][0].numTokens == minNumOfTokens){
+            if(board[selectedSquare][0].numTokens == minNumOfTokens)
+            {
 
             board[selectedSquare][0].stack = (token*) malloc(sizeof(token));
             board[selectedSquare][0].stack->col = players[j].col;
             board[selectedSquare][0].numTokens++; //example instructions to add token to square. Overwrites an already placed token (should not ultimately do this I think, simply an assumption)
             
-            push(value, stack);
+            push(token, square);
 
             //updates the minimum number of tokens
             if(((numPlayers*i) +j +1)% NUM_ROWS==0)
@@ -143,7 +147,6 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
         }
     }
 }
-
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
 {
@@ -178,22 +181,28 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
     if(option == 'y')
     {
-        printf("Which token would you like to move (enter square number): ");
-        scanf(" %d", selectedSquare);
+        printf("Which token would you like to move? (enter square number): ");
+        scanf("%d", &selectedSquare);
 
-        printf("Would you like to move the token up (enter u) or down (enter d): ");
-        scanf(" %c", updown);
+        printf("Would you like to move the token up (enter u) or down (enter d)? : ");
+        scanf(" %c", &updown);
 
-        if(updown == 'u'){
+        if(updown == 'u')
+        {
             board[selectedSquare+1][0].stack = (token*) malloc(sizeof(token));
             board[selectedSquare+1][0].stack->col = players[i].col;
             board[selectedSquare][0].numTokens--;   //take the token from the last square's count
             board[selectedSquare-1][0].numTokens++; //add the token to the new square's count
         }
-        else if(updown == 'd'){
+        else if(updown == 'd')
+        {
+            board[selectedSquare-1][0].stack = (token*) malloc(sizeof(token));
+            board[selectedSquare-1][0].stack->col = players[i].col;
+            board[selectedSquare][0].numTokens--;   //take the token from the last square's count
+            board[selectedSquare+1][0].numTokens++; //add the token to the new square's count
 
         }
-
+        print_board(board); //prints board to show change in token position
     }
 
     }

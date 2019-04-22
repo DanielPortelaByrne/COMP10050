@@ -25,7 +25,7 @@ enum color
 typedef struct token
 {
    enum color col;
-   //token * next;
+   struct token * next;
 
 }token;
 
@@ -41,36 +41,13 @@ typedef struct square
 }square;
 
 
-/* stack tings
+//stack tings
 
 struct stack{
     int token;
     struct stack *next;
 } stack;
 
-<<<<<<< HEAD
-struct stack_elem * push(int value, struct stack_elem *top){
-    struct stack_elem *curr = top;
-    top = malloc(sizeof(stack));
-    top->data = value;
-    top->next = curr;
-    return top;
-}
-
-struct stack_elem * pop(struct stack_elem *top){
-    struct stack_elem *curr = top;
-    if(curr!=NULL){
-        top = curr->next;
-        printf("Stack Data: %d\n", curr->data);
-        free(curr);
-    }
-    return top;
-}*/
-
-
-
-=======
->>>>>>> 88f2317618739d037f4e1aa487ec544f0aa664b9
 
 
 /*
