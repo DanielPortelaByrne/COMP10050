@@ -124,18 +124,23 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             
             if(board[selectedSquare][0].numTokens == minNumOfTokens)
             {
+                //pointer to the top of the stack
+                struct token *top = NULL;
+                //pointer to the current element of the stack
+                struct token *curr = NULL;
+
 
             board[selectedSquare][0].stack = (token*) malloc(sizeof(token));
             board[selectedSquare][0].stack->col = players[j].col;
             board[selectedSquare][0].numTokens++; //example instructions to add token to square. Overwrites an already placed token (should not ultimately do this I think, simply an assumption)
             
-            push(token, square);
+           //token = push(j, token);
+           //token->col;
 
             //updates the minimum number of tokens
             if(((numPlayers*i) +j +1)% NUM_ROWS==0)
                 minNumOfTokens++;
             }
-
             else if(board[selectedSquare][0].numTokens != minNumOfTokens)
             {
                 printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
@@ -181,7 +186,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
     if(option == 'y')
     {
-        printf("Which token would you like to move? (enter square number): ");
+        CHOICE: printf("Which token would you like to move? (enter square number): ");
         scanf("%d", &selectedSquare);
 
         printf("Would you like to move the token up (enter u) or down (enter d)? : ");
@@ -189,18 +194,34 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
         if(updown == 'u')
         {
-            board[selectedSquare+1][0].stack = (token*) malloc(sizeof(token));
+            if(selectedSquare==0)
+            {
+                printf("This token is at the top of the column and can only be moved down!\n\n");
+                goto CHOICE;
+            }
+            else
+            {
+                board[selectedSquare+1][0].stack = (token*) malloc(sizeof(token));
             board[selectedSquare+1][0].stack->col = players[i].col;
             board[selectedSquare][0].numTokens--;   //take the token from the last square's count
             board[selectedSquare-1][0].numTokens++; //add the token to the new square's count
+            }
+            
         }
         else if(updown == 'd')
         {
-            board[selectedSquare-1][0].stack = (token*) malloc(sizeof(token));
+            if(selectedSquare==5)
+            {
+                printf("This token is at the bottom of the column and can only be moved up!\n\n");
+                goto CHOICE;
+            }
+            else
+            {
+                board[selectedSquare-1][0].stack = (token*) malloc(sizeof(token));
             board[selectedSquare-1][0].stack->col = players[i].col;
             board[selectedSquare][0].numTokens--;   //take the token from the last square's count
             board[selectedSquare+1][0].numTokens++; //add the token to the new square's count
-
+            }
         }
         print_board(board); //prints board to show change in token position
     }
