@@ -99,7 +99,7 @@ struct token * pop(square board[NUM_ROWS][NUM_COLUMNS], int value, int row, int 
         board[row][column].stack = curr->next;
         printf("Stack Data: %d\n", curr->col);
         free(curr);
-        board[row][columns].numTokens--;
+        board[row][column].numTokens--;
     }
     return board[row][column].stack;
 }
