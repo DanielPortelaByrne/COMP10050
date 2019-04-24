@@ -14,6 +14,8 @@ int value;
     
     int selectedSquare= 0;
 
+    int numTokens= 0;
+
 void printLine();
 
 /*
@@ -138,20 +140,24 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             if(board[selectedSquare][0].numTokens == minNumOfTokens)
             {
                 //pointer to the top of the stack
-                board[row][column].stack = NULL;
+                //board[row][column].stack = NULL; ************
                 //pointer to the current element of the stack
-                struct token *curr = NULL;
+                //struct token *curr = NULL; *******************************************************************************
+                value = j;
                 push(board, value, selectedSquare, 0);
 
-            //updates the minimum number of tokens
-            if(((numPlayers*i) +j +1)% NUM_ROWS==0)
-                minNumOfTokens++;
+                //updates the minimum number of tokens
+                if(((numPlayers*i) +j +1)% NUM_ROWS==0)
+                {
+                    minNumOfTokens++;
+                }
             }
-            else if(board[selectedSquare][0].numTokens != minNumOfTokens)
+            else
             {
                 printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
                 j--;
             }
+         
 
             print_board(board);
 
