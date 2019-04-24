@@ -83,13 +83,3 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]);
  *
  */
 int initialize_players(player players[NUM_PLAYERS]);
-
-int value;
-
-    int row;
-
-    int column;
-
-    int minNumOfTokens= 0;
-    
-    int selectedSquare= 0;

@@ -15,6 +15,8 @@ int main(int argc, char** argv)
     
     //the number of players
     int numPlayers =0;
+
+    
     
     //creates the squares of the board
     initialize_board(board);

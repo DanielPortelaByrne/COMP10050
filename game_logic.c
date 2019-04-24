@@ -3,6 +3,17 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+int value;
+
+    int row;
+
+    int column;
+
+    int minNumOfTokens= 0;
+    
+    int selectedSquare= 0;
+
 void printLine();
 
 /*
@@ -110,8 +121,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     */
 
     //keeps track of the min no. of tokens placed on a square in the first column
-    int minNumOfTokens= 0;
-    int selectedSquare= 0;
+    
 
     for(int i=0; i<4; i++)
     { //these for loops ensure each player places their tokens on the first column
@@ -130,8 +140,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                 board[row][column].stack = NULL;
                 //pointer to the current element of the stack
                 struct token *curr = NULL;
-                push(square board[NUM_ROWS][NUM_COLUMNS], value, selectedSquare, 0);
-                //token->col;
+                push(board, value, selectedSquare, 0);
 
             //updates the minimum number of tokens
             if(((numPlayers*i) +j +1)% NUM_ROWS==0)
