@@ -68,24 +68,26 @@ void printLine()
 }
 
 
-struct token * push(int value, struct token *top)
+struct token * push(square board[NUM_ROWS][NUM_COLUMNS], int value, int row, int column)
 {
-    struct token *curr = top; //top is a pointer to the top of the stack
-    top = malloc(sizeof(token)); //creates a new node which top points to
-    top->col = value; //value is integer value of element to be pushed to stack!
-    top->next = curr; //current/original top goes to next value?
-    return top; //return new top of stack
+    struct token *curr = board[row][column].stack; //top is a pointer to the top of the stack
+    board[row][column].stack = malloc(sizeof(token)); //creates a new node which top points to
+    board[row][column].stack->col = value; //value is integer value of element to be pushed to stack!
+    board[row][column].stack->next = curr; //current/original top goes to next value?
+    return board[row][column].stack; //return new top of stack
+    board[selectedSquare][0].numTokens++; 
 }
 
-struct token * pop(struct token *top)
+struct token * pop(square board[NUM_ROWS][NUM_COLUMNS], int value, int row, int column)
 {
-    struct token *curr = top;
-    if(curr!=NULL){
-        top = curr->next;
+    struct token *curr = board[row][column].stack;
+    if(curr!=NULL)
+    {
+        board[row][column].stack = curr->next;
         printf("Stack Data: %d\n", curr->col);
         free(curr);
     }
-    return top;
+    return board[row][column].stack;
 }
 
 /*
@@ -125,17 +127,11 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             if(board[selectedSquare][0].numTokens == minNumOfTokens)
             {
                 //pointer to the top of the stack
-                struct token *top = NULL;
+                board[row][column].stack = NULL;
                 //pointer to the current element of the stack
                 struct token *curr = NULL;
-
-
-            board[selectedSquare][0].stack = (token*) malloc(sizeof(token));
-            board[selectedSquare][0].stack->col = players[j].col;
-            board[selectedSquare][0].numTokens++; //example instructions to add token to square. Overwrites an already placed token (should not ultimately do this I think, simply an assumption)
-            
-           //token = push(j, token);
-           //token->col;
+                push(square board[NUM_ROWS][NUM_COLUMNS], value, selectedSquare, 0);
+                //token->col;
 
             //updates the minimum number of tokens
             if(((numPlayers*i) +j +1)% NUM_ROWS==0)
