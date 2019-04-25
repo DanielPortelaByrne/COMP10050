@@ -130,64 +130,41 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
         for(int j=0; j<numPlayers; j++)
         {
 
-            printf("%s, please select a square of the leftmost column (squares numbered 0-5)\n", players[j].name);
-            scanf("%d", &selectedSquare);
-
-            /*TO BE IMPLEMENTED: if square contains min no. of tokens and does not have a token of the same color of the player.
-              VERIFY whether the square selected has the min. no. and whether it does not contain a token of the same color selected by the player. */
-
-                if(board[selectedSquare][0].numTokens == minNumOfTokens)
-                {
-                value = j;
-                push(board, value, selectedSquare, 0);
-
-                //updates the minimum number of tokens
-                    if(((numPlayers*i) +j +1)% NUM_ROWS==0)
-                    {
-                        minNumOfTokens = 1;
-                        goto LOOP;
-                    }
-                }
-                else
-                {
-                    printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
-                    j--;
-                }
-                print_board(board);
-         }
-         tokensLeft--;
-        }
-
-LOOP: for(int i=0; i<tokensLeft; i++)
-{ //these for loops ensure each player places their tokens on the first column
-        for(int j=0; j<numPlayers; j++)
-        {
-
             HERE: printf("%s, please select a square of the leftmost column (squares numbered 0-5)\n", players[j].name);
             scanf("%d", &selectedSquare);
 
             /*TO BE IMPLEMENTED: if square contains min no. of tokens and does not have a token of the same color of the player.
               VERIFY whether the square selected has the min. no. and whether it does not contain a token of the same color selected by the player. */
-
-                if(board[selectedSquare][0].numTokens == minNumOfTokens && board[selectedSquare][0].stack->col != players[j].col)
+            
+            if(board[selectedSquare][0].numTokens == minNumOfTokens)
+            {
+                if(minNumOfTokens>=1 && board[selectedSquare][0].stack->col == players[j].col)
                 {
+                    printf("You cannot place on your own colour!\n\n");
+                    goto HERE;
+                }
+                //pointer to the top of the stack
+                //board[row][column].stack = NULL; ************
+                //pointer to the current element of the stack
+                //struct token *curr = NULL; *******************************************************************************
                 value = j;
                 push(board, value, selectedSquare, 0);
 
                 //updates the minimum number of tokens
-                    if(((numPlayers*i) +j +1)% NUM_ROWS==0)
-                    {
-                        minNumOfTokens++;
-                    }
+                if(((numPlayers*i) +j +1)% NUM_ROWS==0)
+                {
+                    minNumOfTokens++;
                 }
+            }
                 else
                 {
-                    printf("You can't place on top of your own token!\n");
-                    goto HERE;
+                    printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
+                    j--;
                 }
+                
                 print_board(board);
-         }
-        }
+          }
+    }
 }
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
