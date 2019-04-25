@@ -199,7 +199,13 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         CHOICE: printf("Which token would you like to move? (enter square number): ");
         scanf("%d", &selectedSquare);
 
-        printf("Would you like to move the token up (enter u) or down (enter d)? : ");
+        if(board[selectedSquare][0].stack->col != players[i].col)
+            {
+                printf("You can only move your own token colour!\n\n");
+                goto CHOICE;
+            }
+
+        UPDOWN: printf("Would you like to move the token up (enter u) or down (enter d)? : ");
         scanf(" %c", &updown);
 
         if(updown == 'u')
@@ -207,12 +213,12 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
             if(selectedSquare==0)
             {
                 printf("This token is at the top of the column and can only be moved down!\n\n");
-                goto CHOICE;
+                goto UPDOWN;
             }
-            else if(board[selectedSquare-1][0].stack == players[j].col)
+            else if(board[selectedSquare-1][0].stack->col == players[i].col)
             {
                 printf("You cannot stack on top of your own token colour!\n\n");
-                goto CHOICE;
+                goto UPDOWN;
             }
             else
             {
@@ -225,12 +231,12 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
             if(selectedSquare==5)
             {
                 printf("This token is at the bottom of the column and can only be moved up!\n\n");
-                goto CHOICE;
+                goto UPDOWN;
             }
-            else if(board[selectedSquare+1][0].stack == players[j].col)
+            else if(board[selectedSquare+1][0].stack->col == players[i].col)
             {
                 printf("You cannot stack on top of your own token colour!\n\n");
-                goto CHOICE;
+                goto UPDOWN;
             }
             else
             {
