@@ -77,7 +77,7 @@ void print_board(square board[NUM_ROWS][NUM_COLUMNS])
 
 void printLine()
 {
-  printf("   -------------------------------------\n");  
+  printf("   -------------------------------------\n");
 }
 
 
