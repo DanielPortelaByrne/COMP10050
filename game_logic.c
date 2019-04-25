@@ -14,7 +14,7 @@ int value;
     
     int selectedSquare= 0;
 
-    int tokensLeft = 4;
+    char col[7][7] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange", "\0"};
 
 void printLine();
 
@@ -130,7 +130,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
         for(int j=0; j<numPlayers; j++)
         {
 
-            HERE: printf("%s, please select a square of the leftmost column (squares numbered 0-5)\n", players[j].name);
+            HERE: printf("%s, your token colour is %s, please select a square of the leftmost column (squares numbered 0-5)\n",  players[j].name, col[j]);
             scanf("%d", &selectedSquare);
 
             /*TO BE IMPLEMENTED: if square contains min no. of tokens and does not have a token of the same color of the player.
@@ -140,7 +140,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             {
                 if(minNumOfTokens>=1 && board[selectedSquare][0].stack->col == players[j].col)
                 {
-                    printf("You cannot place on your own colour!\n\n");
+                    printf("You cannot place on your own token!\n\n");
                     goto HERE;
                 }
                 //pointer to the top of the stack
@@ -156,14 +156,17 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                     minNumOfTokens++;
                 }
             }
-                else
-                {
-                    printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
-                    j--;
-                }
-                
-                print_board(board);
-          }
+
+            else
+            {
+                printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
+                goto HERE;
+            }
+        
+
+            print_board(board);
+
+        }
     }
 }
 
@@ -189,7 +192,6 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     for(int i=0; i<numPlayers; i++)
     {
     //dice roll
-    players[i].col;
     dice = rand() % 6;
     dice++; //eliminates possibility of dice rolling a zero
 
