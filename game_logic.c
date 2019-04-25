@@ -129,7 +129,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
         for(int j=0; j<numPlayers; j++)
         {
 
-            printf("%s, please select a square of the leftmost column (squares numbered 0-5)\n", players[j].name);
+            HERE: printf("%s, please select a square of the leftmost column (squares numbered 0-5)\n", players[j].name);
             scanf("%d", &selectedSquare);
 
             /*TO BE IMPLEMENTED: if square contains min no. of tokens and does not have a token of the same color of the player.
@@ -137,6 +137,11 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             
             if(board[selectedSquare][0].numTokens == minNumOfTokens)
             {
+                if(minNumOfTokens>=1 && board[selectedSquare][0].stack->col == players[j].col)
+                {
+                    printf("You cannot place on your own colour!\n\n");
+                    goto HERE;
+                }
                 //pointer to the top of the stack
                 //board[row][column].stack = NULL; ************
                 //pointer to the current element of the stack
@@ -150,6 +155,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                     minNumOfTokens++;
                 }
             }
+
             else
             {
                 printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
