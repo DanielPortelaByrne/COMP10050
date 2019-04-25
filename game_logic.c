@@ -14,8 +14,6 @@ int value;
     
     int selectedSquare= 0;
 
-    int numTokens= 0;
-
 void printLine();
 
 /*
@@ -187,7 +185,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     for(int i=0; i<numPlayers; i++)
     {
     //dice roll
-    
+    players[i].col;
     dice = rand() % 6;
     dice++; //eliminates possibility of dice rolling a zero
 
@@ -213,12 +211,9 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
             }
             else
             {
-                board[selectedSquare+1][0].stack = (token*) malloc(sizeof(token));
-            board[selectedSquare+1][0].stack->col = players[i].col;
-            board[selectedSquare][0].numTokens--;   //take the token from the last square's count
-            board[selectedSquare-1][0].numTokens++; //add the token to the new square's count
-            }
-            
+                pop(board, value, selectedSquare, 0);
+                push(board, value, selectedSquare-1, 0);
+            }   
         }
         else if(updown == 'd')
         {
@@ -229,10 +224,8 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
             }
             else
             {
-                board[selectedSquare-1][0].stack = (token*) malloc(sizeof(token));
-            board[selectedSquare-1][0].stack->col = players[i].col;
-            board[selectedSquare][0].numTokens--;   //take the token from the last square's count
-            board[selectedSquare+1][0].numTokens++; //add the token to the new square's count
+                pop(board, value, selectedSquare, 0);
+                push(board, value, selectedSquare+1, 0);
             }
         }
         print_board(board); //prints board to show change in token position
