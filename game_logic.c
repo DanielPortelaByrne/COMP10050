@@ -211,6 +211,11 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                 printf("This token is at the top of the column and can only be moved down!\n\n");
                 goto CHOICE;
             }
+            else if(board[selectedSquare-1][0].stack == players[j].col)
+            {
+                printf("You cannot stack on top of your own token colour!\n\n");
+                goto CHOICE;
+            }
             else
             {
                 board[selectedSquare+1][0].stack = (token*) malloc(sizeof(token));
@@ -225,6 +230,11 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
             if(selectedSquare==5)
             {
                 printf("This token is at the bottom of the column and can only be moved up!\n\n");
+                goto CHOICE;
+            }
+            else if(board[selectedSquare+1][0].stack == players[j].col)
+            {
+                printf("You cannot stack on top of your own token colour!\n\n");
                 goto CHOICE;
             }
             else
