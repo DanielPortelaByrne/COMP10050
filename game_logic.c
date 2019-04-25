@@ -139,7 +139,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             {
                 if(minNumOfTokens>=1 && board[selectedSquare][0].stack->col == players[j].col)
                 {
-                    printf("You cannot place on your own colour!\n\n");
+                    printf("You cannot place on your own token!\n\n");
                     goto HERE;
                 }
                 //pointer to the top of the stack
@@ -161,7 +161,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                 printf("There is already a token on this square! You may only stack tokens when there are no more available squares on the first column.\n");
                 goto HERE;
             }
-         
+        
 
             print_board(board);
 
@@ -191,7 +191,6 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     for(int i=0; i<numPlayers; i++)
     {
     //dice roll
-    players[i].col;
     dice = rand() % 6;
     dice++; //eliminates possibility of dice rolling a zero
 
