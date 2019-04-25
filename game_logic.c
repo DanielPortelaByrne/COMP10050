@@ -187,70 +187,78 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     char updown;
 
     srand(time(NULL)); //seeds rand to current time
-
     for(int i=0; i<numPlayers; i++)
     {
-    //dice roll
-    dice = rand() % 6;
-    dice++; //eliminates possibility of dice rolling a zero
+        //dice roll
+        dice = rand() % 6;
+        dice++; //eliminates possibility of dice rolling a zero
 
-    printf("%s has rolled the dice and got %d\n", players[i].name, dice);
-    printf("%s, would you like to move one of your tokens up or down?\n(Optional: Enter (y) for yes, (n) for no): ", players[i].name);
-    scanf(" %c", &option);
-    printf("\n");
+        printf("%s has rolled the dice and got %d\n", players[i].name, dice);
+        printf("%s, would you like to move one of your tokens up or down?\n(Optional: Enter (y) for yes, (n) for no): ", players[i].name);
+        scanf(" %c", &option);
+        printf("\n");
 
-    if(option == 'y')
-    {
-        CHOICE: printf("Which token would you like to move? (enter square number): ");
-        scanf("%d", &selectedSquare);
-
-        if(board[selectedSquare][0].stack->col != players[i].col)
-            {
-                printf("You can only move your own token colour!\n\n");
-                goto CHOICE;
-            }
-
-        UPDOWN: printf("Would you like to move the token up (enter u) or down (enter d)? : ");
-        scanf(" %c", &updown);
-
-        if(updown == 'u')
+        //moving token up or down on first column
+        if(option == 'y')
         {
-            if(selectedSquare==0)
+            CHOICE: printf("Which token would you like to move? (enter square number): ");
+            scanf("%d", &selectedSquare);
+
+            if(board[selectedSquare][0].stack->col != players[i].col)
+                {
+                    printf("You can only move your own token colour!\n\n");
+                    goto CHOICE;
+                }
+
+            UPDOWN: printf("Would you like to move the token up (enter u) or down (enter d)? : ");
+            scanf(" %c", &updown);
+
+            if(updown == 'u')
             {
-                printf("This token is at the top of the column and can only be moved down!\n\n");
-                goto UPDOWN;
+                if(selectedSquare==0)
+                {
+                    printf("This token is at the top of the column and can only be moved down!\n\n");
+                    goto UPDOWN;
+                }
+                else if(board[selectedSquare-1][0].stack->col == players[i].col)
+                {
+                    printf("You cannot stack on top of your own token colour!\n\n");
+                    goto UPDOWN;
+                }
+                else
+                {
+                    pop(board, value, selectedSquare, 0);
+                    push(board, value, selectedSquare-1, 0);
+                }   
             }
-            else if(board[selectedSquare-1][0].stack->col == players[i].col)
+            else if(updown == 'd')
             {
-                printf("You cannot stack on top of your own token colour!\n\n");
-                goto UPDOWN;
+                if(selectedSquare==5)
+                {
+                    printf("This token is at the bottom of the column and can only be moved up!\n\n");
+                    goto UPDOWN;
+                }
+                else if(board[selectedSquare+1][0].stack->col == players[i].col)
+                {
+                    printf("You cannot stack on top of your own token colour!\n\n");
+                    goto UPDOWN;
+                }
+                else
+                {
+                    pop(board, value, selectedSquare, 0);
+                    push(board, value, selectedSquare+1, 0);
+                }
             }
-            else
-            {
-                pop(board, value, selectedSquare, 0);
-                push(board, value, selectedSquare-1, 0);
-            }   
+            print_board(board); //prints board to show change in token position
         }
-        else if(updown == 'd')
-        {
-            if(selectedSquare==5)
-            {
-                printf("This token is at the bottom of the column and can only be moved up!\n\n");
-                goto UPDOWN;
-            }
-            else if(board[selectedSquare+1][0].stack->col == players[i].col)
-            {
-                printf("You cannot stack on top of your own token colour!\n\n");
-                goto UPDOWN;
-            }
-            else
-            {
-                pop(board, value, selectedSquare, 0);
-                push(board, value, selectedSquare+1, 0);
-            }
-        }
-        print_board(board); //prints board to show change in token position
+
+        //moving horizontally
+        pop(board, value, dice, token.column);
+        push(board, value, dice, token.column+1);
+        print_board(board);
+        token.column++;
     }
 
-    }
+    
+
 }
