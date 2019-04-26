@@ -97,7 +97,6 @@ struct token * pop(square board[NUM_ROWS][NUM_COLUMNS], int value, int row, int 
     if(curr!=NULL)
     {
         board[row][column].stack = curr->next;
-        printf("Stack Data: %d\n", curr->col);
         free(curr);
         board[row][column].numTokens--;
     }
@@ -176,6 +175,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
 {
+   
     int colu = 0;
     //function should manage the turns of the game
 
@@ -192,12 +192,15 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     int selectedSquare=0;
     char updown;
     
+
+
+    for(int j=0; j<99; j++){
     srand(time(NULL)); //seeds rand to current time
-    GAME: for(int i=0; i<numPlayers; i++)
+     for(int i=0; i<numPlayers; i++)
     {
+        int location = 0;
         //dice roll
         dice = rand() % 6;
-         //eliminates possibility of dice rolling a zero
 
         printf("%s has rolled the dice and got %d\n", players[i].name, dice);
         printf("%s, would you like to move one of your tokens up or down?\n(Optional: Enter (y) for yes, (n) for no): ", players[i].name);
@@ -207,10 +210,10 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         //moving token up or down on first column
         if(option == 'y')
         {
-            CHOICE: printf("Which token would you like to move? (enter square number): ");
-            scanf("%d", &selectedSquare);
+            CHOICE: printf("Which token would you like to move? (enter row and column number): ");
+            scanf("%d", &selectedSquare, &location);
 
-            if(board[selectedSquare][0].stack->col != players[i].col)
+            if(board[selectedSquare][location].stack->col != players[i].col)
                 {
                     printf("You can only move your own token colour!\n\n");
                     goto CHOICE;
@@ -226,15 +229,15 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("This token is at the top of the column and can only be moved down!\n\n");
                     goto CHOICE;
                 }
-                else if(minNumOfTokens>=1 && board[selectedSquare][0].stack->col == players[i].col)
+                else if(minNumOfTokens>=1 && board[selectedSquare][location].stack->col == players[i].col)
                 {
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
                 }
                 else
                 {
-                    pop(board, value, selectedSquare, 0);
-                    push(board, value, selectedSquare-1, 0);
+                    pop(board, value, selectedSquare, location);
+                    push(board, value, selectedSquare-1, location);
                 }   
             }
             else if(updown == 'd')
@@ -244,33 +247,27 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("This token is at the bottom of the column and can only be moved up!\n\n");
                     goto CHOICE;
                 }
-                else if(minNumOfTokens>=1 && board[selectedSquare][0].stack->col == players[i].col)
+                else if(minNumOfTokens>=1 && board[selectedSquare][location].stack->col == players[i].col)
                 {
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
                 }
                 else
                 {
-                    pop(board, value, selectedSquare, 0);
-                    push(board, value, selectedSquare+1, 0);
+                    pop(board, value, selectedSquare, location);
+                    push(board, value, selectedSquare+1, location);
                 }
             }
             print_board(board); //prints board to show change in token position
         }
-
-    }
      //moving horizontally
-        
-        /*int location = 0;
-
+        printf("What is the column of the token you would like to move forward? ");
+        scanf("%d", &location);
+        printf("\n");
         pop(board, value, dice, location);
         location++;
         push(board, value, dice, location);
         print_board(board);
-<<<<<<< HEAD
-        goto GAME;
-=======
-        goto GAME;*/
     }
->>>>>>> cb41c1575dba3f63982c7e33197199099ed86714
+    }
 }
