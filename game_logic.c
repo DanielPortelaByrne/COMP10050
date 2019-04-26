@@ -204,6 +204,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         int location = 0;
         //dice roll
         dice = rand() % 6;
+        value=i;
 
         printf("%s has rolled the dice and got %d\n", players[i].name, dice);
         printf("%s, would you like to move one of your tokens up or down?\n(Optional: Enter (y) for yes, (n) for no): ", players[i].name);
