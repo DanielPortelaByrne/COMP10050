@@ -237,10 +237,14 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
                 }
-                else if((selectedSquare||dice == 4 && location == 2) || (selectedSquare||dice == 0 && location == 3) || (selectedSquare||dice == 2 && location == 4) || (selectedSquare||dice == 3 && location == 5) || (selectedSquare||dice == 1 && location == 6) || (selectedSquare||dice == 5 && location == 7))
+                /*else if((selectedSquare||dice == 4 && location == 2) || (selectedSquare||dice == 0 && location == 3) || (selectedSquare||dice == 2 && location == 4) || (selectedSquare||dice == 3 && location == 5) || (selectedSquare||dice == 1 && location == 6) || (selectedSquare||dice == 5 && location == 7))
                 {
                     printf("You can't move this token until all other tokens are ahead!\n");
                     goto CHOICE;
+                }*/
+                else if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
+                {
+                    printf("You hit an obstacle! This token will not be able to move until it is in last place\n");
                 }
                 else if(board[dice-1][location].stack==NULL)
                 {
@@ -267,10 +271,14 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
                 }
-                else if((selectedSquare||dice == 4 && location == 2) || (selectedSquare||dice == 0 && location == 3) || (selectedSquare||dice == 2 && location == 4) || (selectedSquare||dice == 3 && location == 5) || (selectedSquare||dice == 1 && location == 6) || (selectedSquare||dice == 5 && location == 7))
+                /*else if(((selectedSquare||dice) == 4 && location == 2) || ((selectedSquare||dice) == 0 && location == 3) || ((selectedSquare||dice) == 2 && location == 4) || ((selectedSquare||dice) == 3 && location == 5) || ((selectedSquare||dice) == 1 && location == 6) || ((selectedSquare||dice) == 5 && location == 7))
                 {
                     printf("You can't move this token until all other tokens are ahead!\n");
                     goto CHOICE;
+                }*/
+                else if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
+                {
+                    printf("You hit an obstacle! This token will not be able to move until it is in last place\n");
                 }
                 else if(board[dice+1][location].stack==NULL)
                 {
