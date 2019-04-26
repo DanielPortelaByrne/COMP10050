@@ -124,7 +124,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     //keeps track of the min no. of tokens placed on a square in the first column
     
 
-    for(int i=0; i<4; i++)
+    for(int i=0; i<2; i++)
     { //these for loops ensure each player places their tokens on the first column
         for(int j=0; j<numPlayers; j++)
         {
@@ -185,7 +185,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     char option;
     int selectedSquare=0;
     char updown;
-
+    for(int i=0; i<99; i++){
     srand(time(NULL)); //seeds rand to current time
     for(int i=0; i<numPlayers; i++)
     {
@@ -210,7 +210,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     goto CHOICE;
                 }
 
-            UPDOWN: printf("Would you like to move the token up (enter u) or down (enter d)? : ");
+            printf("Would you like to move the token up (enter u) or down (enter d)? : ");
             scanf(" %c", &updown);
 
             if(updown == 'u')
@@ -218,12 +218,12 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                 if(selectedSquare==0)
                 {
                     printf("This token is at the top of the column and can only be moved down!\n\n");
-                    goto UPDOWN;
+                    goto CHOICE;
                 }
-                else if(board[selectedSquare-1][0].stack->col == players[i].col)
+                else if(minNumOfTokens>=1 && board[selectedSquare][0].stack->col == players[i].col)
                 {
                     printf("You cannot stack on top of your own token colour!\n\n");
-                    goto UPDOWN;
+                    goto CHOICE;
                 }
                 else
                 {
@@ -236,12 +236,12 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                 if(selectedSquare==5)
                 {
                     printf("This token is at the bottom of the column and can only be moved up!\n\n");
-                    goto UPDOWN;
+                    goto CHOICE;
                 }
-                else if(board[selectedSquare+1][0].stack->col == players[i].col)
+                else if(minNumOfTokens>=1 && board[selectedSquare][0].stack->col == players[i].col)
                 {
                     printf("You cannot stack on top of your own token colour!\n\n");
-                    goto UPDOWN;
+                    goto CHOICE;
                 }
                 else
                 {
@@ -253,12 +253,11 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         }
 
         //moving horizontally
-        pop(board, value, dice, token.column);
+        /*pop(board, value, dice, token.column);
         push(board, value, dice, token.column+1);
         print_board(board);
-        token.column++;
+        token.column++;*/
     }
-
-    
+    }
 
 }

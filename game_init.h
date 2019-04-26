@@ -26,6 +26,7 @@ typedef struct token
 {
    enum color col;
    struct token * next;
+   int column;
 
 }token;
 
