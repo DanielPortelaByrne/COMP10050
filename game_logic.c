@@ -16,6 +16,8 @@ int value;
 
     char col[7][7] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange", "\0"};
 
+    int location = 0;
+
 void printLine();
 
 /*
@@ -83,14 +85,11 @@ void printLine()
 
 struct token * push(square board[NUM_ROWS][NUM_COLUMNS], int value, int row, int column)
 {
-    if(board[selectedSquare][0].numTokens == 0){
-        board[selectedSquare][0].stack->col = players[].col;
-    }
     struct token *curr = board[row][column].stack; //top is a pointer to the top of the stack
     board[row][column].stack = malloc(sizeof(token)); //creates a new node which top points to
     board[row][column].stack->col = value; //value is integer value of element to be pushed to stack!
     board[row][column].stack->next = curr; //current/original top goes to next value?
-    board[selectedSquare][0].numTokens++;
+    board[selectedSquare][location].numTokens++;
     return board[row][column].stack; //return new top of stack
 }
 
@@ -126,6 +125,8 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     */
 
     //keeps track of the min no. of tokens placed on a square in the first column
+    board[row][column].stack = NULL;
+    struct token *curr = NULL;
     
     for(int i=0; i<4; i++)
     { //these for loops ensure each player places their tokens on the first column
@@ -145,16 +146,11 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                     printf("You cannot place on your own token!\n\n");
                     goto HERE;
                 }
-                //pointer to the top of the stack
-                //board[row][column].stack = NULL; ************
-                //pointer to the current element of the stack
-                //struct token *curr = NULL; *******************************************************************************
+
+                
                 value = j;
+
                 push(board, value, selectedSquare, 0);
-                //initlialise location of specific coloured token on board
-                //location = 0;
-                //players[j].tokens[i].col[j].location;
-                //eg. token colour red is specific to location 00
 
                 //updates the minimum number of tokens
                 if(((numPlayers*i) +j +1)% NUM_ROWS==0)
@@ -178,8 +174,6 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
 {
-   
-    int colu = 0;
     //function should manage the turns of the game
 
     /* For each player this function should:
@@ -201,7 +195,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     srand(time(NULL)); //seeds rand to current time
      for(int i=0; i<numPlayers; i++)
     {
-        int location = 0;
+        
         //dice roll
         dice = rand() % 6;
         value=i;
@@ -215,13 +209,18 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         if(option == 'y')
         {
             CHOICE: printf("Which token would you like to move? (enter row and column number): ");
-            scanf("%d", &selectedSquare, &location);
+            scanf("%d%d", &selectedSquare, &location);
 
             if(board[selectedSquare][location].stack->col != players[i].col)
                 {
                     printf("You can only move your own token colour!\n\n");
                     goto CHOICE;
                 }
+        else if((selectedSquare||dice == 4 && location == 2) || (selectedSquare||dice == 0 && location == 3) || (selectedSquare||dice == 2 && location == 4) || (selectedSquare||dice == 3 && location == 5) || (selectedSquare||dice == 1 && location == 6) || (selectedSquare||dice == 5 && location == 7))
+        {
+            printf("You can't move this token until all other tokens are ahead!\n");
+            goto CHOICE;
+        }
 
             printf("Would you like to move the token up (enter u) or down (enter d)? : ");
             scanf(" %c", &updown);
@@ -233,10 +232,22 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("This token is at the top of the column and can only be moved down!\n\n");
                     goto CHOICE;
                 }
-                else if(minNumOfTokens>=1 && board[selectedSquare][location].stack->col == players[i].col)
+                else if(minNumOfTokens>=1 && board[selectedSquare-1][location].stack->col == players[i].col)
                 {
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
+                }
+                else if((selectedSquare||dice == 4 && location == 2) || (selectedSquare||dice == 0 && location == 3) || (selectedSquare||dice == 2 && location == 4) || (selectedSquare||dice == 3 && location == 5) || (selectedSquare||dice == 1 && location == 6) || (selectedSquare||dice == 5 && location == 7))
+                {
+                    printf("You can't move this token until all other tokens are ahead!\n");
+                    goto CHOICE;
+                }
+                else if(board[dice-1][location].stack==NULL)
+                {
+                    board[row][column].stack = NULL;
+                    struct token *curr = NULL;
+                    pop(board, value, selectedSquare, location);
+                    push(board, value, selectedSquare-1, location);
                 }
                 else
                 {
@@ -251,10 +262,20 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("This token is at the bottom of the column and can only be moved up!\n\n");
                     goto CHOICE;
                 }
-                else if(minNumOfTokens>=1 && board[selectedSquare][location].stack->col == players[i].col)
+                else if(minNumOfTokens>=1 && board[selectedSquare+1][location].stack->col == players[i].col)
                 {
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
+                }
+                else if((selectedSquare||dice == 4 && location == 2) || (selectedSquare||dice == 0 && location == 3) || (selectedSquare||dice == 2 && location == 4) || (selectedSquare||dice == 3 && location == 5) || (selectedSquare||dice == 1 && location == 6) || (selectedSquare||dice == 5 && location == 7))
+                {
+                    printf("You can't move this token until all other tokens are ahead!\n");
+                    goto CHOICE;
+                }
+                else if(board[dice+1][location].stack==NULL)
+                {
+                    pop(board, value, selectedSquare, location);
+                    push(board, value, selectedSquare+1, location);
                 }
                 else
                 {
@@ -265,13 +286,27 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
             print_board(board); //prints board to show change in token position
         }
      //moving horizontally
-        printf("What is the column of the token you would like to move forward? ");
+
+        printf("Row number is %d, What is the column of the token you would like to move forward? ", dice);
         scanf("%d", &location);
         printf("\n");
+
+        if(board[dice][location].stack==NULL)
+        {
+            printf("There is no token on this square to be moved!\n");
+            goto PRINT;
+        }
+ 
+        value = board[dice][location].stack->col;
         pop(board, value, dice, location);
         location++;
         push(board, value, dice, location);
-        print_board(board);
+        PRINT: print_board(board);
+
+        if(board[dice][location].type == OBSTACLE)
+        {
+            printf("You hit an obstacle! This token will not be able to move until it is in last place\n");
+        }
     }
     }
 }
