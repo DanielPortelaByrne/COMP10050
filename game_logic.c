@@ -261,12 +261,12 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
         //moving horizontally
         
-        int location = 0;
+        /*int location = 0;
 
         pop(board, value, dice, location);
         location++;
         push(board, value, dice, location);
         print_board(board);
-        goto GAME;
+        goto GAME;*/
     }
 }
