@@ -83,6 +83,9 @@ void printLine()
 
 struct token * push(square board[NUM_ROWS][NUM_COLUMNS], int value, int row, int column)
 {
+    if(board[selectedSquare][0].numTokens == 0){
+        board[selectedSquare][0].stack->col = players[].col;
+    }
     struct token *curr = board[row][column].stack; //top is a pointer to the top of the stack
     board[row][column].stack = malloc(sizeof(token)); //creates a new node which top points to
     board[row][column].stack->col = value; //value is integer value of element to be pushed to stack!
