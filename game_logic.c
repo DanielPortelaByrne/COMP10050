@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 
 int value;
@@ -17,6 +18,10 @@ int value;
     char col[7][7] = {"Red", "Blue", "Green", "Yellow", "Pink", "Orange", "\0"};
 
     int location = 0;
+
+    bool win = false;
+
+int numOfTokensInCol[9] = {8,0};
 
 void printLine();
 
@@ -146,8 +151,6 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                     printf("You cannot place on your own token!\n\n");
                     goto HERE;
                 }
-
-                
                 value = j;
 
                 push(board, value, selectedSquare, 0);
@@ -190,12 +193,19 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     char updown;
     
 
-
-    for(int j=0; j<99; j++){
+    do{
     srand(time(NULL)); //seeds rand to current time
      for(int i=0; i<numPlayers; i++)
     {
-        
+          if(location == 8)
+        {
+            players[i].numTokensLastCol++;
+        }
+        else if(players[i].numTokensLastCol == 3)
+        {
+            win = true;
+        }
+
         //dice roll
         dice = rand() % 6;
         value=i;
@@ -216,11 +226,11 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("You can only move your own token colour!\n\n");
                     goto CHOICE;
                 }
-        else if((selectedSquare||dice == 4 && location == 2) || (selectedSquare||dice == 0 && location == 3) || (selectedSquare||dice == 2 && location == 4) || (selectedSquare||dice == 3 && location == 5) || (selectedSquare||dice == 1 && location == 6) || (selectedSquare||dice == 5 && location == 7))
-        {
-            printf("You can't move this token until all other tokens are ahead!\n");
-            goto CHOICE;
-        }
+                else if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
+                {
+                    printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
+                    goto CHOICE;
+                }
 
             printf("Would you like to move the token up (enter u) or down (enter d)? : ");
             scanf(" %c", &updown);
@@ -237,21 +247,9 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
                 }
-                /*else if((selectedSquare||dice == 4 && location == 2) || (selectedSquare||dice == 0 && location == 3) || (selectedSquare||dice == 2 && location == 4) || (selectedSquare||dice == 3 && location == 5) || (selectedSquare||dice == 1 && location == 6) || (selectedSquare||dice == 5 && location == 7))
-                {
-                    printf("You can't move this token until all other tokens are ahead!\n");
-                    goto CHOICE;
-                }*/
                 else if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
                 {
-                    printf("You hit an obstacle! This token will not be able to move until it is in last place\n");
-                }
-                else if(board[dice-1][location].stack==NULL)
-                {
-                    board[row][column].stack = NULL;
-                    struct token *curr = NULL;
-                    pop(board, value, selectedSquare, location);
-                    push(board, value, selectedSquare-1, location);
+                    printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
                 }
                 else
                 {
@@ -271,19 +269,9 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
                 }
-                /*else if(((selectedSquare||dice) == 4 && location == 2) || ((selectedSquare||dice) == 0 && location == 3) || ((selectedSquare||dice) == 2 && location == 4) || ((selectedSquare||dice) == 3 && location == 5) || ((selectedSquare||dice) == 1 && location == 6) || ((selectedSquare||dice) == 5 && location == 7))
-                {
-                    printf("You can't move this token until all other tokens are ahead!\n");
-                    goto CHOICE;
-                }*/
                 else if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
                 {
-                    printf("You hit an obstacle! This token will not be able to move until it is in last place\n");
-                }
-                else if(board[dice+1][location].stack==NULL)
-                {
-                    pop(board, value, selectedSquare, location);
-                    push(board, value, selectedSquare+1, location);
+                    printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
                 }
                 else
                 {
@@ -299,6 +287,12 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         scanf("%d", &location);
         printf("\n");
 
+        if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
+                {
+                    printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
+                    goto CHOICE;
+                }
+      
         if(board[dice][location].stack==NULL)
         {
             printf("There is no token on this square to be moved!\n");
@@ -309,12 +303,23 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         pop(board, value, dice, location);
         location++;
         push(board, value, dice, location);
+        numOfTokensInCol[location]++;
+        numOfTokensInCol[location-1]--;
         PRINT: print_board(board);
+        printf("Number of tokens in column %d is %d\n", location-1, numOfTokensInCol[location-1]);
+        printf("Number of tokens in column %d is %d\n", location, numOfTokensInCol[location]);
 
         if(board[dice][location].type == OBSTACLE)
         {
             printf("You hit an obstacle! This token will not be able to move until it is in last place\n");
         }
-    }
-    }
+    
+     }
+
+    } while(win == false);
+}
+void win_game()
+{
+    printf("Congratulations you've won the game!");
+
 }
