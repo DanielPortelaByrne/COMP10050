@@ -149,6 +149,10 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
                 //struct token *curr = NULL; *******************************************************************************
                 value = j;
                 push(board, value, selectedSquare, 0);
+                //initlialise location of specific coloured token on board
+                //location = 0;
+                //players[j].tokens[i].col[j].location;
+                //eg. token colour red is specific to location 00
 
                 //updates the minimum number of tokens
                 if(((numPlayers*i) +j +1)% NUM_ROWS==0)
@@ -172,6 +176,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
 {
+    int colu = 0;
     //function should manage the turns of the game
 
     /* For each player this function should:
@@ -188,11 +193,11 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     char updown;
 
     srand(time(NULL)); //seeds rand to current time
-    for(int i=0; i<numPlayers; i++)
+    GAME: for(int i=0; i<numPlayers; i++)
     {
         //dice roll
         dice = rand() % 6;
-        dice++; //eliminates possibility of dice rolling a zero
+         //eliminates possibility of dice rolling a zero
 
         printf("%s has rolled the dice and got %d\n", players[i].name, dice);
         printf("%s, would you like to move one of your tokens up or down?\n(Optional: Enter (y) for yes, (n) for no): ", players[i].name);
@@ -253,13 +258,15 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
             print_board(board); //prints board to show change in token position
         }
 
+
         //moving horizontally
-        pop(board, value, dice, token.column);
-        push(board, value, dice, token.column+1);
+        if()
+        int location = 0;
+
+        pop(board, value, dice, location);
+        location++;
+        push(board, value, dice, location);
         print_board(board);
-        token.column++;
+        goto GAME;
     }
-
-    
-
 }

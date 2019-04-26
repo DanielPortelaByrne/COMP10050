@@ -57,15 +57,12 @@ struct stack{
  */
 typedef struct players
 {
-
     //a player is characterized by a name, color AND-> the no. of their tokens in the last column!!
     char name[50];
     enum color col;
     int numTokensLastCol;
     struct token token;
-
 }player; 
-
 
 /*
  * This function creates the board for the first time
