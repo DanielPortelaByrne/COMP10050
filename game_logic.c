@@ -258,8 +258,8 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
             print_board(board); //prints board to show change in token position
         }
 
-
-        //moving horizontally
+    }
+     //moving horizontally
         
         int location = 0;
 
@@ -268,5 +268,4 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         push(board, value, dice, location);
         print_board(board);
         goto GAME;
-    }
 }
