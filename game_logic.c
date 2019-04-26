@@ -226,11 +226,15 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("You can only move your own token colour!\n\n");
                     goto CHOICE;
                 }
-                else if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
+                while(numOfTokensInCol[location-1] != 0)
                 {
-                    printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
-                    goto CHOICE;
+                    if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
+                    {
+                        printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
+                        goto CHOICE;
+                    }
                 }
+                
 
             printf("Would you like to move the token up (enter u) or down (enter d)? : ");
             scanf(" %c", &updown);
@@ -247,15 +251,18 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
                 }
-                else if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
-                {
-                    printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
-                }
                 else
                 {
                     pop(board, value, selectedSquare, location);
                     push(board, value, selectedSquare-1, location);
-                }   
+                }  
+                while(numOfTokensInCol[location-1] != 0)
+                {
+                    if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
+                    {
+                        printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
+                    }
+                }
             }
             else if(updown == 'd')
             {
@@ -269,14 +276,17 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     printf("You cannot stack on top of your own token colour!\n\n");
                     goto CHOICE;
                 }
-                else if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
-                {
-                    printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
-                }
                 else
                 {
                     pop(board, value, selectedSquare, location);
                     push(board, value, selectedSquare+1, location);
+                }
+                while(numOfTokensInCol[location-1] != 0)
+                {
+                    if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
+                    {
+                        printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
+                    }
                 }
             }
             print_board(board); //prints board to show change in token position
@@ -290,7 +300,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         if(board[dice][location].type == OBSTACLE || board[selectedSquare][location].type == OBSTACLE)
                 {
                     printf("This token is on an obstacle, you will not be able to move until it is in last place\n");
-                    goto CHOICE;
+                    goto PRINT;
                 }
       
         if(board[dice][location].stack==NULL)
@@ -306,8 +316,8 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         numOfTokensInCol[location]++;
         numOfTokensInCol[location-1]--;
         PRINT: print_board(board);
-        printf("Number of tokens in column %d is %d\n", location-1, numOfTokensInCol[location-1]);
-        printf("Number of tokens in column %d is %d\n", location, numOfTokensInCol[location]);
+        //printf("Number of tokens in column %d is %d\n", location-1, numOfTokensInCol[location-1]);
+        //printf("Number of tokens in column %d is %d\n", location, numOfTokensInCol[location]);
 
         if(board[dice][location].type == OBSTACLE)
         {
